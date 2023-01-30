@@ -4,25 +4,28 @@ import { Ionicons, Entypo, AntDesign, FontAwesome } from '@expo/vector-icons';
 import { styles } from "./styles";
 
 type Props = {
-    task:  string;
+    task: string;
     onRemove: () => void;
     onMark?: boolean;
 }
 
-export function Tasks({ task, onRemove, onMark}: Props) {
+export function Tasks({ task, onRemove, onMark }: Props) {
     const [mark, setMark] = useState(false);
+    const [tasksMarked, setTaskMarked] = useState<any[]>([]);
+
 
 
     function handleMark() {
         setMark(mark)
         if (mark == false) {
             setMark(true);
-            onMark = false
+            setTaskMarked(prevState => [...prevState, mark]);
             console.log('Marcado = ', mark)
         }
         else {
             setMark(false);
             onMark = true
+            setTaskMarked(prevState => prevState.filter(Task => Task !== task)),
             console.log('Marcado = ', mark)
         }
     }
@@ -31,7 +34,8 @@ export function Tasks({ task, onRemove, onMark}: Props) {
     // Contar
     // Marcar -- CHECK
     // Editar -- No More
-    // Repetir tarefas 
+    // Repetir tarefas -- Check/No more
+
 
     return (
         <>
@@ -41,7 +45,7 @@ export function Tasks({ task, onRemove, onMark}: Props) {
                     (
 
                         <View style={styles.containerMarked}>
-                            <Pressable style={styles.check} onPress={handleMark}>
+                            <Pressable style={styles.toggle} onPress={handleMark}>
                                 <View style={styles.circle} />
                                 <AntDesign name="checkcircle" size={24} color="#5E60CE" />
                             </Pressable>
@@ -59,6 +63,7 @@ export function Tasks({ task, onRemove, onMark}: Props) {
                     (
                         <View style={styles.container}>
                             <Pressable
+                                style={styles.toggle}
                                 onPress={handleMark}>
                                 <Entypo name="circle" size={24} color="#4EA8DE" />
                             </Pressable>

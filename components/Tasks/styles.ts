@@ -31,9 +31,10 @@ export const styles = StyleSheet.create({
         borderColor: 'transparent',
     },
 
-    check: {
+    toggle: {
         justifyContent: 'center',
         alignItems: "center",
+        padding: 2,
     },
 
     circle: {
