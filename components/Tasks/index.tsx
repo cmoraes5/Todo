@@ -4,34 +4,77 @@ import { Ionicons, Entypo, AntDesign, FontAwesome } from '@expo/vector-icons';
 import { styles } from "./styles";
 
 type Props = {
-    task: string;
+    task:  string;
     onRemove: () => void;
-    onMark: any;
+    onMark?: boolean;
 }
 
 export function Tasks({ task, onRemove, onMark}: Props) {
     const [mark, setMark] = useState(false);
 
+
+    function handleMark() {
+        setMark(mark)
+        if (mark == false) {
+            setMark(true);
+            onMark = false
+            console.log('Marcado = ', mark)
+        }
+        else {
+            setMark(false);
+            onMark = true
+            console.log('Marcado = ', mark)
+        }
+    }
+
+
     // Contar
-    // Marcar
-    // Editar
-    // Repetir tarefas
+    // Marcar -- CHECK
+    // Editar -- No More
+    // Repetir tarefas 
 
     return (
-        <View style={styles.container}>
+        <>
+            {
 
-            <Pressable 
-                onPress={onMark}>
-                <Entypo name="circle" size={24} color="#4EA8DE" />
-            </Pressable>
+                mark === true ?
+                    (
 
-            <Text style={styles.text}>
-                {task}
-            </Text>
+                        <View style={styles.containerMarked}>
+                            <Pressable style={styles.check} onPress={handleMark}>
+                                <View style={styles.circle} />
+                                <AntDesign name="checkcircle" size={24} color="#5E60CE" />
+                            </Pressable>
 
-            <Pressable onPress={onRemove}>
-                <Ionicons name="trash-outline" size={24} color="#808080" />
-            </Pressable>
-        </View>
+                            <Text style={styles.taskMarked}>
+                                {task}
+                            </Text>
+
+                            <Pressable onPress={onRemove}>
+                                <Ionicons name="trash-outline" size={24} color="#808080" />
+                            </Pressable>
+                        </View>
+                    )
+                    :
+                    (
+                        <View style={styles.container}>
+                            <Pressable
+                                onPress={handleMark}>
+                                <Entypo name="circle" size={24} color="#4EA8DE" />
+                            </Pressable>
+
+                            <Text style={styles.taskUnMarked}>
+                                {task}
+                            </Text>
+
+                            <Pressable onPress={onRemove}>
+                                <Ionicons name="trash-outline" size={24} color="#808080" />
+                            </Pressable>
+                        </View>
+                    )
+            }
+
+
+        </>
     )
 }
