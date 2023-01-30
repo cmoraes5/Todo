@@ -11,7 +11,7 @@ export const styles = StyleSheet.create({
         borderTopWidth: 1,
     },
 
-    image: {
+    clipboard: {
         marginTop: 48,
         width: 56,
         height: 56,

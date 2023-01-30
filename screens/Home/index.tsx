@@ -11,20 +11,24 @@ import { Empty } from "../../components/Empty";
 import { Marked } from "../../components/Marked";
 
 export function Home() {
-    const [tasks, setTasks] = useState<string[]>([]);
-    const [taskDesc, setTaskDesc] = useState('');
+    // Styles
 
+    const [tasks, setTasks] = useState<string[]>([]);
+    const [tasksMarked, setTaskMarked] = useState<any[]>([Marked]);
+    const [taskDesc, setTaskDesc] = useState('');
     const [mark, setMark] = useState(false);
 
     function handleMark() {
         setMark(mark)
-        if (mark == false) {
-            setMark(true);
-            console.log('Marcado = ', mark)
-
-        }
-        else{
+        if (mark == true) {
             setMark(false);
+            console.log('Marcado = ', mark) //==> Mark boolean
+            console.log('Task = ', tasks) //==> All tasks
+            console.log('Tasks Marked = ', tasksMarked) //==> All tasks
+            setTaskMarked(prevState => [...prevState, tasksMarked]);
+        }
+        else{+
+            setMark(true);
             console.log('Marcado = ', mark)
         }
     }

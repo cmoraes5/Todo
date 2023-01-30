@@ -20,7 +20,8 @@ export function Tasks({ task, onRemove, onMark}: Props) {
     return (
         <View style={styles.container}>
 
-            <Pressable onPress={onMark}>
+            <Pressable 
+                onPress={onMark}>
                 <Entypo name="circle" size={24} color="#4EA8DE" />
             </Pressable>
 
